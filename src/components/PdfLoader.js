@@ -32,6 +32,17 @@ class PdfLoader extends Component<Props, State> {
     });
   }
 
+  getDerivedStateFromProps(nextProps: Props) {
+    const { url } = this.nextProps;
+
+    pdfjs.getDocument(url).then(pdfDocument => {
+      this.setState({
+        pdfDocument: pdfDocument
+      });
+    });
+  }
+
+
   render() {
     const { children, beforeLoad } = this.props;
     const { pdfDocument } = this.state;
